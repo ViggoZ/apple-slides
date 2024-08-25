@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Define the desired order for time filters
     const timeOrder = [
         "WWDC June 2024",
-        "Apple Event September 2023",
-        "WWDC June 2023",
         "Apple Event May 2024",
         "Apple Event October 2023",
+        "Apple Event September 2023",
+        "WWDC June 2023",
         "Apple Event September 2022",
         "WWDC June 2022",
         "Apple Event March 2022",
@@ -34,14 +34,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "Apple Event September 2021",
         "WWDC June 2021",
         "Apple Event April 2021",
-        "Apple Event October 2020",
         "Apple Event November 2020",
+        "Apple Event October 2020",
         "Apple Event September 2020",
         "WWDC June 2020",
         "Apple Event September 2019"
     ];
 
-    // 使用相对路径获取文件列表
     fetch('assets/slides/')
         .then(response => response.text())
         .then(html => {
@@ -87,9 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     const button = document.createElement('div');
                     button.className = 'time-filter-button w-full mb-2';
                     button.dataset.value = time;
+                    const encodedTime = encodeURIComponent(time);
                     button.innerHTML = `
                         <div class="relative w-full overflow-hidden bg-cover bg-center rounded-t filter-image">
-                            <img src="assets/${time}.webp" alt="${time}" class="absolute inset-0 w-full h-full object-contain bg-gray-300 py-4">
+                            <img src="assets/${encodedTime}.webp" alt="${time}" class="absolute inset-0 w-full h-full object-contain bg-gray-300 py-4">
                         </div>
                         <button class="py-2 px-4 rounded-b w-full ${!firstTimeSet ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}">${time}</button>
                     `;
@@ -154,8 +154,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const button = document.createElement('button');
             button.className = `category-filter-button py-2 px-4 rounded flex items-center ${selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`;
             button.dataset.value = category;
+            const encodedCategoryIcon = encodeURIComponent(categoryIcons[category] || 'default.svg');
             button.innerHTML = `
-                <img src="assets/${categoryIcons[category] || 'default.svg'}" alt="${category}" class="w-6 h-6 mr-2">
+                <img src="assets/${encodedCategoryIcon}" alt="${category}" class="w-6 h-6 mr-2">
                 <span>${category}</span>
             `;
             categoryFilterContainer.appendChild(button);
@@ -165,8 +166,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadImages(imageList) {
         imageGallery.innerHTML = "";
         imageList.forEach(image => {
+            const fileName = image.split('/').pop(); 
+            const encodedFileName = encodeURIComponent(fileName); // 对文件名进行编码
             const imgElement = document.createElement("img");
-            imgElement.src = `assets/slides/${image.split('/').pop()}`;
+            imgElement.src = `assets/slides/${encodedFileName}`; // 使用编码后的文件名
             imgElement.alt = image;
             imgElement.className = "w-full h-auto rounded shadow";
             imageGallery.appendChild(imgElement);
