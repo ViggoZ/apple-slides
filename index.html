@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Event Image Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Sticky positioning for left filter and right top category */
+        .sticky {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Adjust the size of the left filter images */
+        .filter-image {
+            height: 120px; /* Smaller height for images */
+            width: 100%; /* Full width */
+        }
+
+        /* Ensure smooth scrolling */
+        body {
+            scroll-behavior: smooth;
+        }
+
+        /* Additional padding for the image gallery to accommodate the fixed category filter */
+        #imageGallery {
+            padding-top: 60px;
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+    <div class="flex">
+        <!-- Left Filter Sidebar -->
+        <div id="timeFilter" class="w-1/8 p-4 bg-gray-200 rounded sticky overflow-y-auto max-h-screen">
+            <h2 class="text-lg font-semibold mb-4">Filter by Time</h2>
+            <!-- Time filter buttons will be dynamically loaded here -->
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 ml-6">
+            <!-- Category Filter Bar -->
+            <div id="categoryFilter" class="flex flex-wrap gap-2 mb-6 sticky bg-white py-2">
+                <!-- Category filter buttons will be dynamically loaded here -->
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="imageGallery">
+                <!-- Images will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
