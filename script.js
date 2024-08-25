@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Apple Event September 2019"
     ];
 
-    fetch('assets/slides/')
+    fetch('assets/slides')
         .then(response => response.text())
         .then(html => {
             const parser = new DOMParser();
