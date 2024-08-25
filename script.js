@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
         imageGallery.innerHTML = "";
         imageList.forEach(image => {
             const imgElement = document.createElement("img");
-            imgElement.src = `/assets/slides/${image.split('/').pop()}`;
+            imgElement.src = `./assets/slides/${image.split('/').pop()}`;
             imgElement.alt = image;
             imgElement.className = "w-full h-auto rounded shadow";
             imageGallery.appendChild(imgElement);
