@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "Apple Event September 2019"
     ];
 
-    fetch('assets/slides')
+    // 使用相对路径获取文件列表
+    fetch('assets/slides/')
         .then(response => response.text())
         .then(html => {
             const parser = new DOMParser();
