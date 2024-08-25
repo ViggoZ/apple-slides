@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apple Event Image Viewer</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         /* Sticky positioning for left filter and right top category */
         .sticky {
@@ -15,44 +17,47 @@
 
         /* Adjust the size of the left filter images */
         .filter-image {
-            height: 120px; /* Smaller height for images */
-            width: 100%; /* Full width */
+            height: 120px;
+            /* Smaller height for images */
+            width: 100%;
+            /* Full width */
         }
 
         /* Ensure smooth scrolling */
         body {
             scroll-behavior: smooth;
         }
-
-        /* Additional padding for the image gallery to accommodate the fixed category filter */
-        #imageGallery {
-            padding-top: 60px;
-        }
     </style>
     <script src="script.js" defer></script>
 </head>
-<body class="bg-gray-100 p-6">
 
-    <div class="flex">
-        <!-- Left Filter Sidebar -->
-        <div id="timeFilter" class="w-1/8 p-4 bg-gray-200 rounded sticky overflow-y-auto max-h-screen">
-            <h2 class="text-lg font-semibold mb-4">Filter by Time</h2>
-            <!-- Time filter buttons will be dynamically loaded here -->
-        </div>
+<body class="h-full">
 
-        <!-- Main Content Area -->
-        <div class="flex-1 ml-6">
-            <!-- Category Filter Bar -->
-            <div id="categoryFilter" class="flex flex-wrap gap-2 mb-6 sticky bg-white py-2">
-                <!-- Category filter buttons will be dynamically loaded here -->
+    <!-- Left Filter Sidebar -->
+    <div class="lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <!-- <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4"> -->
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto hide-scrollbar border-r border-gray-200 bg-white">
+            <div class="flex sticky shrink-0 items-center bg-white border-b border-gray-200 shadow-sm p-7 items-center gap-x-4">
+                <img class="h-8 w-8" src="assets/logo.svg" alt="apple">
+                <div class="font-semibold text-lg">Apple Bento Slides</div>
             </div>
-
-            <!-- Image Gallery -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="imageGallery">
-                <!-- Images will be dynamically loaded here -->
+            <div id="timeFilter" class="flex flex-1 flex-col gap-y-7 p-4">
+                <h2 class="text-lg font-semibold mb-4">Filter by Time</h2>
             </div>
         </div>
     </div>
 
+    <!-- Main Content Area -->
+    <div class="lg:pl-72">
+        <div class="flex sticky shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 py-6 shadow-sm">
+            <div id="categoryFilter" class="flex flex-wrap gap-2">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 py-6" id="imageGallery">
+            <!-- Images will be dynamically loaded here -->
+        </div>
+    </div>
+
 </body>
+
 </html>

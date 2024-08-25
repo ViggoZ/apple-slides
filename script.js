@@ -72,14 +72,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="time-filter-button w-full mb-2" data-value="All">
                     <div class="relative w-full overflow-hidden bg-gray-200 rounded-t filter-image">
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <span>All</span>
+                            <span>All Image Here</span>
                         </div>
                     </div>
-                    <button class="bg-blue-500 text-white py-2 px-4 rounded-b w-full">All</button>
+                    <button class="bg-gray-300 text-gray-700 py-2 px-4 rounded-b w-full">All</button>
                 </div>
             `;
-            
-            // Sort times based on the predefined order
+
+            // Sort times based on the predefined order and select the first available time as default
+            let firstTimeSet = false;
             timeOrder.forEach(time => {
                 if (times.has(time)) {
                     const button = document.createElement('div');
@@ -87,10 +88,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     button.dataset.value = time;
                     button.innerHTML = `
                         <div class="relative w-full overflow-hidden bg-cover bg-center rounded-t filter-image">
-                            <img src="/assets/${time}.webp" alt="${time}" class="absolute inset-0 w-full h-full object-contain">
+                            <img src="/assets/${time}.webp" alt="${time}" class="absolute inset-0 w-full h-full object-contain bg-gray-300 py-4">
                         </div>
-                        <button class="bg-gray-300 text-gray-700 py-2 px-4 rounded-b w-full">${time}</button>
+                        <button class="py-2 px-4 rounded-b w-full ${!firstTimeSet ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}">${time}</button>
                     `;
+                    if (!firstTimeSet) {
+                        selectedTime = time; // 默认选择第一个实际的时间
+                        firstTimeSet = true;
+                    }
                     timeFilterContainer.appendChild(button);
                 }
             });
@@ -98,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateCategoryFilter(allCategories);
             addEventListeners(images);
 
-            filterImages(images);
+            filterImages(images); // 根据初始选择的时间和类别过滤图像
         })
         .catch(error => console.error('Error loading images:', error));
 
