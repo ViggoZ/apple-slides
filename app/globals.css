@@ -1,0 +1,19 @@
+/* app/globals.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+aside {
+  position: sticky;
+  top: 0;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
