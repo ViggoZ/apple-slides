@@ -5,9 +5,13 @@ import React from 'react';
 
 interface FilterProps {
   times: string[];
+  categories: string[];
   selectedTime: string;
+  selectedCategory: string;
   onTimeChange: (time: string) => void;
+  onCategoryChange: (category: string) => void;
   getTimeIcon: (time: string) => string; // 获取时间图标的函数
+  getCategoryIcon: (category: string) => string; // 获取类别图标的函数
 }
 
 const Filter: React.FC<FilterProps> = ({
