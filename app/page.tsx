@@ -135,7 +135,7 @@ export default function Home() {
     <div className="flex bg-neutral-950">
       {/* 左侧过滤栏 */}
       <aside className="rounded rounded-2xl m-6 lg:fixed sticky hide-scrollbar lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col overflow-y-auto ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900">
-        <div className="flex sticky shrink-0 items-center border-b border-neutral-800 shadow-sm p-4flex sticky shrink-0 items-center justify-center border-b border-neutral-800 shadow-sm p-4 gap-x-4 bg-neutral-900 items-center gap-x-4 bg-neutral-900">
+        <div className="flex sticky shrink-0 items-center shadow-sm p-4flex sticky shrink-0 items-center justify-center shadow-sm p-4 gap-x-4 bg-neutral-900 items-center gap-x-4 bg-neutral-900">
           <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
           <h1 className="font-semibold text-lg text-white">Apple Slides</h1>
         </div>
@@ -154,8 +154,8 @@ export default function Home() {
       {/* 主内容区域 */}
       <main className="lg:pl-64">
         {/* 右侧顶部类别过滤器 */}
-        <div className='sticky px-6 pt-6 pb-8 before:content bg-gradient-to-b from-neutral-950 to-neutral-950/0 before:absolute before:inset-0 before:bg-black before:bg-opacity-60 before:blur before:-z-10'>
-          <div className="rounded rounded-2xl flex sticky shrink-0 items-center gap-x-4 ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900 px-4 py-4 shadow-sm">
+        <div className='sticky px-6 pt-6 pb-4 before:content bg-gradient-to-b from-neutral-950 to-neutral-950/0 before:absolute before:inset-0 before:bg-black before:bg-opacity-60 before:blur before:-z-10'>
+          <div className="rounded rounded-2xl flex sticky shrink-0 items-center gap-x-4 ring-1 ring-white/15 px-4 py-4 shadow-sm bg-neutral-900">
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => handleCategoryChange('All')}

@@ -20,7 +20,7 @@ const Filter: React.FC<FilterProps> = ({
     <div>
       {/* 时间过滤器 */}
       {times.length > 0 && (
-        <div className="flex flex-1 flex-col gap-y-7 p-4 bg-neutral-900">
+        <div className="flex flex-1 flex-col gap-y-7 px-4 pb-4 bg-neutral-900">
           {/* <h2 className="text-lg font-semibold mb-4">Filter by Time</h2> */}
           <div className="flex flex-col space-y-4">
             <button
