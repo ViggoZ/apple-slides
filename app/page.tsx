@@ -132,12 +132,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-neutral-950">
       {/* 左侧过滤栏 */}
-      <aside className="w-64 h-screen p-4 bg-white shadow-md fixed top-0 left-0 overflow-y-auto">
-        <div className="text-center mb-6">
-          <img src="/logo.svg" alt="Logo" className="w-20 h-20 mx-auto" />
-          <h1 className="text-2xl font-bold">Apple Bento Slides</h1>
+      <aside className="rounded rounded-2xl m-6 lg:fixed sticky hide-scrollbar lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col overflow-y-auto ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900">
+        <div className="flex sticky shrink-0 items-center border-b border-neutral-800 shadow-sm p-4flex sticky shrink-0 items-center justify-center border-b border-neutral-800 shadow-sm p-4 gap-x-4 bg-neutral-900 items-center gap-x-4 bg-neutral-900">
+          <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
+          <h1 className="font-semibold text-lg text-white">Apple Slides</h1>
         </div>
         <Filter
           times={times}
@@ -152,32 +152,33 @@ export default function Home() {
       </aside>
 
       {/* 主内容区域 */}
-      <main className="flex-1 ml-64 p-6">
+      <main className="lg:pl-64">
         {/* 右侧顶部类别过滤器 */}
-        <div className="sticky top-0 z-10 bg-white p-4 shadow mb-4">
-          <h2 className="text-lg font-semibold mb-2">Filter by Category</h2>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => handleCategoryChange('All')}
-              className={`py-2 px-4 rounded ${
-                selectedCategory === 'All' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
-              }`}
-            >
-              <img src={getCategoryIcon('All')} alt="All" className="w-6 h-6 inline mr-2" />
-              All
-            </button>
-            {filteredCategories.map((category) => (
+        <div className='sticky px-6 pt-6 pb-8 before:content bg-gradient-to-b from-neutral-950 to-neutral-950/0 before:absolute before:inset-0 before:bg-black before:bg-opacity-60 before:blur before:-z-10'>
+          <div className="rounded rounded-2xl flex sticky shrink-0 items-center gap-x-4 ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900 px-4 py-4 shadow-sm">
+            <div className="flex flex-wrap gap-2">
               <button
-                key={category}
-                onClick={() => handleCategoryChange(category)}
-                className={`py-2 px-4 rounded ${
-                  selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                onClick={() => handleCategoryChange('All')}
+                className={`flex flex-col items-center py-2 px-4 rounded-2xl ${
+                  selectedCategory === 'All' ? 'bg-neutral-800 text-white' : 'bg-neutral-950 text-white'
                 }`}
               >
-                <img src={getCategoryIcon(category)} alt={category} className="w-6 h-6 inline mr-2" />
-                {category}
+                <img src={getCategoryIcon('All')} alt="All" className="w-12 h-12 inline" />
+                All
               </button>
-            ))}
+              {filteredCategories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryChange(category)}
+                  className={`flex flex-col items-center py-2 px-4 rounded-2xl ${
+                    selectedCategory === category ? 'bg-neutral-800 text-white' : 'text-white/50'
+                  }`}
+                >
+                  <img src={getCategoryIcon(category)} alt={category} className="w-12 h-12 inline" />
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         {/* 图片展示区 */}
