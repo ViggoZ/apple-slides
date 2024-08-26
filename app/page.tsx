@@ -155,12 +155,12 @@ export default function Home() {
       <main className="lg:pl-64">
         {/* 右侧顶部类别过滤器 */}
         <div className='sticky px-6 pt-6 pb-4 before:content bg-gradient-to-b from-neutral-950 to-neutral-950/0 before:absolute before:inset-0 before:bg-black before:bg-opacity-60 before:blur before:-z-10'>
-          <div className="rounded rounded-2xl flex sticky shrink-0 items-center gap-x-4 ring-1 ring-white/15 px-4 py-4 shadow-sm bg-neutral-900">
+          <div className="w-full rounded rounded-2xl flex sticky shrink-0 items-center gap-x-4 ring-1 ring-white/15 px-4 py-4 shadow-sm bg-neutral-900">
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => handleCategoryChange('All')}
                 className={`flex flex-col items-center py-2 px-4 rounded-2xl ${
-                  selectedCategory === 'All' ? 'bg-neutral-800 text-white' : 'bg-neutral-950 text-white'
+                  selectedCategory === 'All' ? 'bg-neutral-800 text-white' : 'text-white'
                 }`}
               >
                 <img src={getCategoryIcon('All')} alt="All" className="w-12 h-12 inline" />
