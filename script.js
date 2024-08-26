@@ -41,14 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
         "Apple Event September 2019"
     ];
 
+    // Fetch the list of files in the directory
     fetch('assets/slides/')
         .then(response => response.text())
         .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             const images = Array.from(doc.querySelectorAll('a'))
-                .map(link => decodeURIComponent(link.getAttribute('href')))
-                .filter(href => href.endsWith('.webp'));
+            .map(link => decodeURIComponent(link.getAttribute('href')))
+            .filter(href => href.endsWith('.webp'));
 
             const times = new Set();
             allCategories = new Set();
@@ -164,9 +165,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadImages(imageList) {
         imageGallery.innerHTML = "";
         imageList.forEach(image => {
+            // 生成图片的编码路径
             const encodedImageName = encodeURIComponent(image.split('/').pop());
             const imgElement = document.createElement("img");
-            imgElement.src = `assets/slides/${encodedImageName}`;
+            imgElement.src = `assets/slides/${encodedImageName}`; // 确保这个路径和你直接访问的一致
             imgElement.alt = image;
             imgElement.className = "w-full h-auto rounded shadow";
             imageGallery.appendChild(imgElement);
@@ -187,3 +189,20 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImages(filteredImages);
     }
 });
+
+
+function loadImages(imageList) {
+    imageGallery.innerHTML = "";
+    imageList.forEach(image => {
+        const fileName = image.split('/').pop();
+        const encodedImageName = encodeURIComponent(fileName);
+        console.log('Loading image:', `assets/slides/${encodedImageName}`); // 打印路径以调试
+        const imgElement = document.createElement("img");
+        imgElement.src = `assets/slides/${encodedImageName}`;
+        imgElement.alt = image;
+        imgElement.className = "w-full h-auto rounded shadow";
+        imgElement.onload = () => console.log('Image loaded successfully:', imgElement.src);
+        imgElement.onerror = () => console.error('Error loading image:', imgElement.src);
+        imageGallery.appendChild(imgElement);
+    });
+}
