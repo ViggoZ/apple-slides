@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     button.dataset.value = time;
                     button.innerHTML = `
                         <div class="relative w-full overflow-hidden bg-cover bg-center rounded-t filter-image">
-                            <img src="assets/${time}.webp" alt="${time}" class="absolute inset-0 w-full h-full object-contain bg-gray-300 py-4">
+                            <img src="assets/${encodeURIComponent(time)}.webp" alt="${time}" class="absolute inset-0 w-full h-full object-contain bg-gray-300 py-4">
                         </div>
                         <button class="py-2 px-4 rounded-b w-full ${!firstTimeSet ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}">${time}</button>
                     `;
@@ -164,8 +164,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadImages(imageList) {
         imageGallery.innerHTML = "";
         imageList.forEach(image => {
+            const encodedImageName = encodeURIComponent(image.split('/').pop());
             const imgElement = document.createElement("img");
-            imgElement.src = `assets/slides/${image.split('/').pop()}`;
+            imgElement.src = `assets/slides/${encodedImageName}`;
             imgElement.alt = image;
             imgElement.className = "w-full h-auto rounded shadow";
             imageGallery.appendChild(imgElement);
