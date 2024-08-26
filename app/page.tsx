@@ -8,7 +8,7 @@ import ImageGallery from './components/ImageGallery';
 export default function Home() {
   const [times, setTimes] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [selectedTime, setSelectedTime] = useState<string>('All');
+  const [selectedTime, setSelectedTime] = useState<string>('WWDC June 2024');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [images, setImages] = useState<string[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
