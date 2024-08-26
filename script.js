@@ -174,7 +174,21 @@ document.addEventListener("DOMContentLoaded", function () {
             imageGallery.appendChild(imgElement);
         });
     }
-
+    function loadImages(imageList) {
+        imageGallery.innerHTML = "";
+        imageList.forEach(image => {
+            const fileName = image.split('/').pop();
+            const encodedImageName = encodeURIComponent(fileName);
+            console.log('Loading image:', `assets/slides/${encodedImageName}`); // 打印路径以调试
+            const imgElement = document.createElement("img");
+            imgElement.src = `assets/slides/${encodedImageName}`;
+            imgElement.alt = image;
+            imgElement.className = "w-full h-auto rounded shadow";
+            imgElement.onload = () => console.log('Image loaded successfully:', imgElement.src);
+            imgElement.onerror = () => console.error('Error loading image:', imgElement.src);
+            imageGallery.appendChild(imgElement);
+        });
+    }
     function filterImages(images) {
         const filteredImages = images.filter(image => {
             const fileName = image.split('/').pop(); 
@@ -191,18 +205,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-function loadImages(imageList) {
-    imageGallery.innerHTML = "";
-    imageList.forEach(image => {
-        const fileName = image.split('/').pop();
-        const encodedImageName = encodeURIComponent(fileName);
-        console.log('Loading image:', `assets/slides/${encodedImageName}`); // 打印路径以调试
-        const imgElement = document.createElement("img");
-        imgElement.src = `assets/slides/${encodedImageName}`;
-        imgElement.alt = image;
-        imgElement.className = "w-full h-auto rounded shadow";
-        imgElement.onload = () => console.log('Image loaded successfully:', imgElement.src);
-        imgElement.onerror = () => console.error('Error loading image:', imgElement.src);
-        imageGallery.appendChild(imgElement);
-    });
-}
