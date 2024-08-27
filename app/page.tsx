@@ -1,9 +1,10 @@
-// app/page.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import ImageGallery from './components/ImageGallery';
+import { TimeCategory } from '@/types';
+
 
 export default function Home() {
   const [times, setTimes] = useState<string[]>([]);
