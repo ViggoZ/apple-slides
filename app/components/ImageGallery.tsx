@@ -1,23 +1,92 @@
 // app/components/ImageGallery.tsx
 "use client";
 
-import React from 'react';
+import React, { useState } from "react";
+import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface ImageGalleryProps {
   images: string[];
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null,
+  );
+
+  const closeLightbox = () => setSelectedImageIndex(null);
+  const nextImage = () =>
+    setSelectedImageIndex((prev) =>
+      prev === null ? null : (prev + 1) % images.length,
+    );
+  const prevImage = () =>
+    setSelectedImageIndex((prev) =>
+      prev === null ? null : (prev - 1 + images.length) % images.length,
+    );
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 pb-6 pt-1">
-      {images.map((image) => (
+      {images.map((image, index) => (
         <img
           key={image}
           src={image}
           alt={image}
-          className="w-full h-auto rounded-lg"
+          className="w-full h-auto rounded-lg transition-transform duration-300 hover-scale-101 cursor-pointer"
+          onClick={() => setSelectedImageIndex(index)}
         />
       ))}
+
+      {selectedImageIndex !== null && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+          onClick={closeLightbox}
+        >
+          <button
+            className="absolute top-4 right-4 text-white text-2xl"
+            onClick={closeLightbox}
+          >
+            <FaTimes />
+          </button>
+          <button
+            className="absolute left-4 text-white text-3xl"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
+          >
+            <FaChevronLeft />
+          </button>
+          <button
+            className="absolute right-4 text-white text-3xl"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+          >
+            <FaChevronRight />
+          </button>
+          <div className="max-w-7xl max-h-screen overflow-hidden flex items-center justify-center">
+            <img
+              src={images[selectedImageIndex]}
+              alt={images[selectedImageIndex]}
+              className="object-contain max-w-full max-h-screen opacity-0 scale-95"
+              style={{ animation: "fadeInAndScale 0.3s ease-out forwards" }}
+            />
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes fadeInAndScale {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 };

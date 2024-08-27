@@ -32,3 +32,11 @@ aside {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.hover-scale-101 {
+  transition: transform 0.3s ease; /* 添加过渡效果 */
+}
+
+.hover-scale-101:hover {
+  transform: scale(1.01); /* 缩放到 101% */
+}
