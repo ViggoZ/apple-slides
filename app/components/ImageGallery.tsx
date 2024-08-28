@@ -24,7 +24,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 pb-6 pt-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-3 sm:px-6 pb-6 pt-1">
       {images.map((image, index) => (
         <div
           key={image}
@@ -45,17 +45,17 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
 
       {selectedImageIndex !== null && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50"
           onClick={closeLightbox}
         >
           <button
-            className="absolute top-4 right-4 text-white text-2xl"
+            className="hidden sm:flex absolute top-8 right-8 sm:top-16 sm:right-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={closeLightbox}
           >
             <FaTimes />
           </button>
           <button
-            className="absolute left-4 text-white text-3xl"
+            className="hidden sm:flex absolute left-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation();
               prevImage();
@@ -64,7 +64,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
             <FaChevronLeft />
           </button>
           <button
-            className="absolute right-4 text-white text-3xl"
+            className="hidden sm:flex absolute right-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation();
               nextImage();
@@ -72,11 +72,17 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
           >
             <FaChevronRight />
           </button>
+          <button
+            className="absolute items-center bottom-1/4 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
+            onClick={closeLightbox}
+          >
+            <FaTimes />
+          </button>
           <div className="max-w-7xl max-h-screen overflow-hidden flex items-center justify-center">
             <img
               src={images[selectedImageIndex]}
               alt={images[selectedImageIndex]}
-              className="object-contain max-w-full max-h-screen opacity-0 scale-95"
+              className="object-contain p-4 max-w-full max-h-screen opacity-0 scale-95"
               style={{ animation: "fadeInAndScale 0.3s ease-out forwards" }}
             />
           </div>

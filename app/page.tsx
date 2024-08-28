@@ -39,6 +39,22 @@ export default function Home() {
   >({});
   const [isLoading, setIsLoading] = useState(true);
 
+  // 添加一个新的状态来控制过滤栏的显示和隐藏
+  const [isFilterOpen, setIsFilterOpen] = useState(false); // 默认关闭过滤栏
+
+  // 切换过滤栏显示状态的函数
+  const toggleFilter = () => setIsFilterOpen(!isFilterOpen);
+
+  // 关闭过滤栏的函数
+  const closeFilter = () => setIsFilterOpen(false);
+
+  // 添加一个新的状态来控制遮罩的显示和隐藏
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  useEffect(() => {
+    setIsOverlayVisible(isFilterOpen);
+  }, [isFilterOpen]);
+
   useEffect(() => {
     // 设置时间和类别的初始状态
     setTimes(timeOrder);
@@ -155,8 +171,41 @@ export default function Home() {
 
   return (
     <div className="flex bg-neutral-950 min-h-screen">
-      {/* 左侧过滤栏 */}
-      <aside className="rounded-2xl m-3 sm:m-6 hidden lg:fixed sticky hide-scrollbar lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col overflow-y-auto ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900">
+      {/* 移动端顶部导航栏 */}
+      <header className="lg:hidden fixed top-0 w-full bg-neutral-900 z-50 flex items-center justify-between px-4 py-4">
+        <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
+        <h1 className="font-semibold text-lg text-white">Apple Slides</h1>
+        <button onClick={toggleFilter} className="text-white">
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </header>
+
+      {/* 移动端左侧过滤栏 */}
+      <aside className={`sm:m-6 lg:hidden fixed top-16 bottom-0 z-40 overflow-y-auto transition-transform duration-500 ${isFilterOpen ? 'translate-x-0' : 'translate-x-n110'}`}>
+        <Filter
+          times={times}
+          categories={filteredCategories}
+          selectedTime={selectedTime}
+          selectedCategory={selectedCategory}
+          onTimeChange={(time) => { handleTimeChange(time); closeFilter(); }}
+          onCategoryChange={(category) => { handleCategoryChange(category); closeFilter(); }}
+          getTimeIcon={getTimeIcon}
+          getCategoryIcon={getCategoryIcon}
+        />
+      </aside>
+
+      {/* 遮罩层 */}
+      {isOverlayVisible && (
+        <div
+          className="lg:hidden fixed inset-0 z-30 bg-black opacity-90 transition-opacity duration-500"
+          onClick={closeFilter}
+        />
+      )}
+
+      {/* 大屏幕左侧过滤栏 */}
+      <aside className="hidden lg:block rounded-2xl m-3 sm:m-6 fixed top-0 bottom-0 left-0 w-64 z-40 overflow-y-auto bg-neutral-900">
         <div className="flex sticky shrink-0 items-center shadow-sm p-4 justify-center  bg-neutral-900 gap-x-4">
           <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
           <h1 className="font-semibold text-lg text-white">Apple Slides</h1>
@@ -174,7 +223,7 @@ export default function Home() {
       </aside>
 
       {/* 主内容区域 */}
-      <main className="flex-1 lg:ml-64 w-full">
+      <main className="flex-1 lg:ml-64 w-full pt-16 lg:pt-0">
         {isLoading ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="bg-neutral-800 p-6 rounded-3xl flex flex-col items-center justify-center w-48 h-48">
@@ -187,11 +236,11 @@ export default function Home() {
         ) : (
           <>
             {/* 右侧顶部类别过滤器 */}
-            <div className="sticky top-0 w-full px-6 pt-6 pb-4 z-10 before:content bg-gradient-to-b from-neutral-950 to-neutral-950/0 before:absolute before:inset-0 before:bg-black before:bg-opacity-60 before:blur before:-z-10">
+            <div className="sticky top-16 sm:top-0 w-full px-3 sm:px-6 pt-3 sm:pt-6 pb-2 sm:pb-4 z-10 before:content bg-gradient-to-b from-neutral-950 to-neutral-950/0 before:absolute before:inset-0 before:bg-black before:bg-opacity-60 before:blur before:-z-10">
               <div className="relative w-full rounded-2xl min-h-[100px] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 to-neutral-950/0"></div>
                 <div className="absolute inset-0 bg-black bg-opacity-60 blur"></div>
-                <div className="relative w-full h-full rounded-2xl flex items-center ring-1 ring-white/15 px-4 py-4 shadow-sm bg-neutral-900">
+                <div className="relative w-full h-full rounded-2xl flex items-center ring-1 ring-white/15 p-2 sm:p-4 shadow-sm bg-neutral-900">
                   <div className="w-full flex gap-3 overflow-x-auto hide-scrollbar">
                     <button
                       onClick={() => handleCategoryChange("All")}

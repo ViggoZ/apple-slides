@@ -19,7 +19,7 @@ aside {
 
 .sticky {
   position: sticky;
-  top: 0;
+  /* top: 0; */
   z-index: 10;
 }
 
@@ -39,4 +39,9 @@ aside {
 
 .hover-scale-101:hover {
   transform: scale(1.01); /* 缩放到 101% */
+}
+@layer utilities {
+  .translate-x-n110 {
+    transform: translateX(-110%);
+  }
 }
