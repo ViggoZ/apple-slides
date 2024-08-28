@@ -25,13 +25,12 @@ const Filter: React.FC<FilterProps> = ({
       {/* 时间过滤器 */}
       {times.length > 0 && (
         <div className="flex flex-1 flex-col gap-y-7 px-4 pb-4 bg-neutral-900">
-          {/* <h2 className="text-lg font-semibold mb-4">Filter by Time</h2> */}
           <div className="flex flex-col space-y-4">
             <button
               onClick={() => onTimeChange('All')}
               className={`flex flex-col items-center justify-center py-4 px-4 rounded-2xl ${
                 selectedTime === 'All' ? 'bg-neutral-700 text-white' : 'bg-neutral-800 text-white'
-              }`}
+              } hover:bg-neutral-600 transition-colors duration-300`}
             >
               <img
                 src={getTimeIcon('All')}
@@ -46,7 +45,7 @@ const Filter: React.FC<FilterProps> = ({
                 onClick={() => onTimeChange(time)}
                 className={`flex flex-col items-center justify-center py-4 px-4 rounded-2xl ${
                   selectedTime === time ? 'bg-neutral-700 text-white' : 'bg-neutral-800 text-white/50'
-                }`}
+                } hover:bg-neutral-600 transition-colors duration-300`}
               >
                 <img
                   src={getTimeIcon(time)}

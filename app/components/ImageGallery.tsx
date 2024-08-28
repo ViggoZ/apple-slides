@@ -26,13 +26,21 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 pb-6 pt-1">
       {images.map((image, index) => (
-        <img
+        <div
           key={image}
-          src={image}
-          alt={image}
-          className="w-full h-auto rounded-lg transition-transform duration-300 hover-scale-101 cursor-pointer"
+          className="w-full h-auto rounded-lg transition-transform duration-300 hover-scale-101 cursor-pointer bg-neutral-800 animate-pulse"
           onClick={() => setSelectedImageIndex(index)}
-        />
+        >
+          <img
+            src={image}
+            alt={image}
+            className="w-full h-auto rounded-lg opacity-0"
+            onLoad={(e) => {
+              e.currentTarget.classList.remove('opacity-0');
+              e.currentTarget.parentElement?.classList.remove('bg-neutral-800', 'animate-pulse');
+            }}
+          />
+        </div>
       ))}
 
       {selectedImageIndex !== null && (
