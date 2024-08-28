@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({
     <div>
       {/* 时间过滤器 */}
       {times.length > 0 && (
-        <div className="flex flex-1 flex-col gap-y-7 px-4 pb-4 bg-neutral-900">
+        <div className="py-3 flex flex-1 flex-col gap-y-7 px-4 pb-4 bg-neutral-900 hide-scrollbar">
           <div className="flex flex-col space-y-4">
             <button
               onClick={() => onTimeChange('All')}
@@ -35,9 +35,9 @@ const Filter: React.FC<FilterProps> = ({
               <img
                 src={getTimeIcon('All')}
                 alt="All"
-                className="w-[224px] h-[114px] object-cover mb-4 rounded-xl" // 设置图片宽高
+                className="w-[180px] sm:w-[224px] h-[114px] object-cover mb-4 rounded-xl" // 设置图片宽高
               />
-              <span>All</span>
+              <span className="text-center text-sm">All</span>
             </button>
             {times.map((time) => (
               <button
@@ -50,9 +50,9 @@ const Filter: React.FC<FilterProps> = ({
                 <img
                   src={getTimeIcon(time)}
                   alt={time}
-                  className="w-[224px] h-[114px] object-cover mb-4 rounded-xl" // 设置图片宽高
+                  className="w-[180px] sm:w-[224px] h-[114px] object-cover mb-4 rounded-xl" // 设置图片宽高
                 />
-                <span className="text-center">{time}</span>
+                <span className="text-center text-sm">{time}</span>
               </button>
             ))}
           </div>

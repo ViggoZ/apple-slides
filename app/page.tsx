@@ -157,7 +157,7 @@ export default function Home() {
     return 0;
   });
 
-  // 动态生成时间过滤器的预览图标路径
+  // 动态生成时间过滤器的预��图标路径
   const getTimeIcon = (time: string) => {
     const fileName = time.replace(/\s+/g, " ") + ".webp";
     return `/assets/${fileName}`;
@@ -183,7 +183,7 @@ export default function Home() {
       </header>
 
       {/* 移动端左侧过滤栏 */}
-      <aside className={`sm:m-6 lg:hidden fixed top-16 bottom-0 z-40 overflow-y-auto transition-transform duration-500 ${isFilterOpen ? 'translate-x-0' : 'translate-x-n110'}`}>
+      <aside className={`sm:m-6 lg:hidden fixed top-16 bottom-0 z-40 overflow-y-auto transition-transform duration-500 hide-scrollbar ${isFilterOpen ? 'translate-x-0' : 'translate-x-n110'}`}>
         <Filter
           times={times}
           categories={filteredCategories}
@@ -205,8 +205,8 @@ export default function Home() {
       )}
 
       {/* 大屏幕左侧过滤栏 */}
-      <aside className="hidden lg:block rounded-2xl m-3 sm:m-6 fixed top-0 bottom-0 left-0 w-64 z-40 overflow-y-auto bg-neutral-900">
-        <div className="flex sticky shrink-0 items-center shadow-sm p-4 justify-center  bg-neutral-900 gap-x-4">
+      <aside className="hidden lg:block rounded-2xl m-3 sm:m-6 fixed top-0 bottom-0 left-0 w-64 z-40 overflow-y-auto bg-neutral-900 hide-scrollbar">
+        <div className="flex top-0 sticky shrink-0 items-center shadow-sm p-4 justify-center  bg-neutral-900 gap-x-4">
           <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
           <h1 className="font-semibold text-lg text-white">Apple Slides</h1>
         </div>
@@ -223,9 +223,9 @@ export default function Home() {
       </aside>
 
       {/* 主内容区域 */}
-      <main className="flex-1 lg:ml-64 w-full pt-16 lg:pt-0">
+      <main className="flex-1 lg:pl-72 w-full pt-16 lg:pt-0 px-0">
         {isLoading ? (
-          <div className="w-full h-screen flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center">
             <div className="bg-neutral-800 p-6 rounded-3xl flex flex-col items-center justify-center w-48 h-48">
               <svg className="animate-pulse h-12 w-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.8-3.08.35c-1.09-.46-2.09-.48-3.24 0c-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8c1.18-.24 2.31-.93 3.57-.84c1.51.12 2.65.72 3.4 1.8c-3.12 1.87-2.38 5.98.48 7.13c-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25c.29 2.58-2.34 4.5-3.74 4.25"/>
@@ -244,7 +244,7 @@ export default function Home() {
                   <div className="w-full flex gap-3 overflow-x-auto hide-scrollbar">
                     <button
                       onClick={() => handleCategoryChange("All")}
-                      className={`text-sm sm:text-md flex flex-col items-center py-2 px-4 rounded-2xl whitespace-nowrap min-w-[110px] ${
+                      className={`text-sm sm:text-md flex flex-col items-center py-2 px-4 rounded-2xl whitespace-nowrap min-w-[90px] ${
                         selectedCategory === "All"
                           ? "bg-neutral-800 text-white"
                           : "text-white"
@@ -261,7 +261,7 @@ export default function Home() {
                       <button
                         key={category}
                         onClick={() => handleCategoryChange(category)}
-                        className={`text-sm sm:text-md flex flex-col items-center py-2 px-4 rounded-2xl whitespace-nowrap min-w-[110px] ${
+                        className={`text-sm sm:text-md flex flex-col items-center py-2 px-4 rounded-2xl whitespace-nowrap min-w-[90px] ${
                           selectedCategory === category
                             ? "bg-neutral-800 text-white"
                             : "text-white/50"

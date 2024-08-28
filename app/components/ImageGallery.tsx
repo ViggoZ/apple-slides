@@ -24,7 +24,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-3 sm:px-6 pb-6 pt-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-3 sm:px-6 pb-6 pt-3">
       {images.map((image, index) => (
         <div
           key={image}
@@ -48,12 +48,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50"
           onClick={closeLightbox}
         >
-          <button
-            className="hidden sm:flex absolute top-8 right-8 sm:top-16 sm:right-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
+          {/* <button
+            className="hidden sm:flex absolute top-8 right-16 sm:top-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={closeLightbox}
           >
             <FaTimes />
-          </button>
+          </button> */}
           <button
             className="hidden sm:flex absolute left-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={(e) => {
@@ -73,7 +73,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
             <FaChevronRight />
           </button>
           <button
-            className="absolute items-center bottom-1/4 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
+            className="absolute items-center bottom-52 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={closeLightbox}
           >
             <FaTimes />
