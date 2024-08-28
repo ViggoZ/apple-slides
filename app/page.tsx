@@ -6,6 +6,27 @@ import Filter from "./components/Filter";
 import ImageGallery from "./components/ImageGallery";
 import { TimeCategory } from "@/types";
 
+// 将 timeOrder 移到 useEffect 外部，使其在函数作用域内可访问
+const timeOrder = [
+  "WWDC June 2024",
+  "Apple Event May 2024",
+  "Apple Event October 2023",
+  "Apple Event September 2023",
+  "WWDC June 2023",
+  "Apple Event September 2022",
+  "WWDC June 2022",
+  "Apple Event March 2022",
+  "Apple Event October 2021",
+  "Apple Event September 2021",
+  "WWDC June 2021",
+  "Apple Event April 2021",
+  "Apple Event November 2020",
+  "Apple Event October 2020",
+  "Apple Event September 2020",
+  "WWDC June 2020",
+  "Apple Event September 2019",
+];
+
 export default function Home() {
   const [times, setTimes] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
@@ -19,27 +40,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // 定义预设时间顺序
-    const timeOrder = [
-      "WWDC June 2024",
-      "Apple Event May 2024",
-      "Apple Event October 2023",
-      "Apple Event September 2023",
-      "WWDC June 2023",
-      "Apple Event September 2022",
-      "WWDC June 2022",
-      "Apple Event March 2022",
-      "Apple Event October 2021",
-      "Apple Event September 2021",
-      "WWDC June 2021",
-      "Apple Event April 2021",
-      "Apple Event November 2020",
-      "Apple Event October 2020",
-      "Apple Event September 2020",
-      "WWDC June 2020",
-      "Apple Event September 2019",
-    ];
-
     // 设置时间和类别的初始状态
     setTimes(timeOrder);
 
@@ -132,6 +132,13 @@ export default function Home() {
       selectedCategory === "All" || category.includes(selectedCategory);
 
     return matchesTime && matchesCategory;
+  }).sort((a, b) => {
+    if (selectedTime === "All") {
+      const timeA = a.split("/").pop()?.split("-")[0].trim().replace("[", "").replace("]", "") || "";
+      const timeB = b.split("/").pop()?.split("-")[0].trim().replace("[", "").replace("]", "") || "";
+      return timeOrder.indexOf(timeA) - timeOrder.indexOf(timeB);
+    }
+    return 0;
   });
 
   // 动态生成时间过滤器的预览图标路径
@@ -149,8 +156,8 @@ export default function Home() {
   return (
     <div className="flex bg-neutral-950 min-h-screen">
       {/* 左侧过滤栏 */}
-      <aside className="rounded rounded-2xl m-6 lg:fixed sticky hide-scrollbar lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col overflow-y-auto ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900">
-        <div className="flex sticky shrink-0 items-center shadow-sm p-4flex sticky shrink-0 items-center justify-center shadow-sm p-4 gap-x-4 bg-neutral-900 items-center gap-x-4 bg-neutral-900">
+      <aside className="rounded-2xl m-3 sm:m-6 hidden lg:fixed sticky hide-scrollbar lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col overflow-y-auto ring-1 ring-white/10 bg-gradient-to-t from-black to-neutral-900">
+        <div className="flex sticky shrink-0 items-center shadow-sm p-4 justify-center  bg-neutral-900 gap-x-4">
           <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
           <h1 className="font-semibold text-lg text-white">Apple Slides</h1>
         </div>
@@ -167,7 +174,7 @@ export default function Home() {
       </aside>
 
       {/* 主内容区域 */}
-      <main className="flex-1 lg:ml-64">
+      <main className="flex-1 lg:ml-64 w-full">
         {isLoading ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="bg-neutral-800 p-6 rounded-3xl flex flex-col items-center justify-center w-48 h-48">
@@ -185,10 +192,10 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 to-neutral-950/0"></div>
                 <div className="absolute inset-0 bg-black bg-opacity-60 blur"></div>
                 <div className="relative w-full h-full rounded-2xl flex items-center ring-1 ring-white/15 px-4 py-4 shadow-sm bg-neutral-900">
-                  <div className="w-full flex flex-wrap gap-2">
+                  <div className="w-full flex gap-3 overflow-x-auto hide-scrollbar">
                     <button
                       onClick={() => handleCategoryChange("All")}
-                      className={`flex flex-col items-center py-2 px-4 rounded-2xl ${
+                      className={`text-sm sm:text-md flex flex-col items-center py-2 px-4 rounded-2xl whitespace-nowrap min-w-[110px] ${
                         selectedCategory === "All"
                           ? "bg-neutral-800 text-white"
                           : "text-white"
@@ -205,7 +212,7 @@ export default function Home() {
                       <button
                         key={category}
                         onClick={() => handleCategoryChange(category)}
-                        className={`flex flex-col items-center py-2 px-4 rounded-2xl ${
+                        className={`text-sm sm:text-md flex flex-col items-center py-2 px-4 rounded-2xl whitespace-nowrap min-w-[110px] ${
                           selectedCategory === category
                             ? "bg-neutral-800 text-white"
                             : "text-white/50"
