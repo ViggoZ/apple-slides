@@ -48,12 +48,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50"
           onClick={closeLightbox}
         >
-          {/* <button
-            className="hidden sm:flex absolute top-8 right-16 sm:top-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
-            onClick={closeLightbox}
-          >
-            <FaTimes />
-          </button> */}
+          <div className="absolute px-12 top-60 sm:top-60 text-white text-lg font-bold text-center w-full">
+            {/* Extract and display the text content from the image name */}
+            {images[selectedImageIndex].split('/').pop()?.split('-').slice(2, 3).join('').replace(/\[|\]|\.webp/g, '') + '@' + images[selectedImageIndex].split('/').pop()?.split('-').slice(0, 1).join('').replace(/\[|\]|\.webp/g, '')}
+          </div>
           <button
             className="hidden sm:flex absolute left-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={(e) => {
