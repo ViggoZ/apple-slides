@@ -51,6 +51,22 @@ export default function Home() {
   // 添加一个新的状态来控制遮罩的显示和隐藏
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+
+  const openAboutModal = () => setIsAboutModalOpen(true);
+  const closeAboutModal = () => setIsAboutModalOpen(false);
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.keyCode === 27) closeAboutModal();
+    };
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
+
   useEffect(() => {
     setIsOverlayVisible(isFilterOpen);
   }, [isFilterOpen]);
@@ -121,7 +137,7 @@ export default function Home() {
       );
       setFilteredCategories(availableCategories);
 
-      // 如果当前选中的类别在新的类别列表中不存在，则重置为 'All'
+      // 如果当前选中的类别在新的类别列表不存在，则重置为 'All'
       if (!availableCategories.includes(selectedCategory)) {
         setSelectedCategory("All");
       }
@@ -157,7 +173,7 @@ export default function Home() {
     return 0;
   });
 
-  // 动态生成时间过滤器的预��图标路径
+  // 动态生成时间过滤器的预图标路径
   const getTimeIcon = (time: string) => {
     const fileName = time.replace(/\s+/g, " ") + ".webp";
     return `/assets/${fileName}`;
@@ -283,7 +299,51 @@ export default function Home() {
             <ImageGallery images={filteredImages} />
           </>
         )}
+        {/* 固定悬浮的圆形背景的图标About和Twiter */}
+        <div className="fixed bottom-4 right-4 flex-col space-y-4 flex">
+          <a href="https://buymeacoffee.com/viggoz" target="_blank" className="relative rounded-full bg-neutral-800 p-3 hover:bg-neutral-700 transition-colors duration-300 group">
+            <img src="/assets/coffee.svg" alt="Buy Me a Coffee" className="h-6 w-6" />
+            <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 px-2 py-1 bg-neutral-700 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Buy Me a Coffee</span>
+          </a>
+          <a href="https://x.com/decohack" target="_blank" className="relative rounded-full bg-neutral-800 p-3 hover:bg-neutral-700 transition-colors duration-300 group">
+            <img src="/assets/twitter.svg" alt="Twitter" className="h-6 w-6" />
+            <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 px-2 py-1 bg-neutral-700 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">@viggo</span>
+          </a>
+          <a href="#" onClick={openAboutModal} className="relative rounded-full bg-neutral-800 p-3 hover:bg-neutral-700 transition-colors duration-300 group">
+            <img src="/assets/about.svg" alt="About" className="h-6 w-6" />
+            <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 px-2 py-1 bg-neutral-700 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">About</span>
+          </a>
+        </div>
       </main>
+
+      {isAboutModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 transition-opacity duration-300" onClick={closeAboutModal} style={{ opacity: isAboutModalOpen ? 1 : 0 }}>
+          <div className="bg-neutral-800 p-12 rounded-3xl shadow-lg w-11/12 max-w-xl transform transition-transform duration-300 scale-95 opacity-0 translate-y-4" style={{ opacity: isAboutModalOpen ? 1 : 0, transform: isAboutModalOpen ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(16px)' }} onClick={(e) => e.stopPropagation()}>
+            <h2 className="text-2xl font-bold mb-4 text-white">About This Project</h2>
+            <p className="mb-4 font-light text-white/50 leading-relaxed">
+              This project is a curated collection of Apple's most iconic slides, showcasing the evolution of their products and designs through the years. It's a tribute to the innovation and elegance that Apple has brought to the tech industry.
+            </p>
+            <p className="mb-4 text-white/50 leading-relaxed">
+              Created by <a href="https://buymeacoffee.com/viggoz" target="_blank" className="text-orange-500">Viggo</a>, inspired by the need to preserve and appreciate the visual history of Apple's presentations. Special thanks to the open-source community for the inspiration from projects like <a href="https://github.com/rickyzhangca/apple-summary-slides" className="text-orange-500">apple-summary-slides</a>.
+            </p>
+            <div className="flex justify-between items-center mt-6">
+              <a href="https://buymeacoffee.com/viggoz" target="_blank" className="flex items-center space-x-2 text-orange-500">
+                <img src="/assets/coffee.svg" alt="Buy Me a Coffee" className="h-6 w-6" />
+                <span>Buy Me a Coffee</span>
+              </a>
+              <a href="https://x.com/decohack" target="_blank" className="flex items-center space-x-2 text-orange-500">
+                <img src="/assets/twitter.svg" alt="Twitter" className="h-6 w-6" />
+                <span>@viggo</span>
+              </a>
+            </div>
+          </div>
+          <button onClick={closeAboutModal} className="absolute bottom-4 right-4 rounded-full bg-neutral-800 p-3 hover:bg-neutral-700 transition-colors duration-300">
+            <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

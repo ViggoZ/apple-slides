@@ -2,20 +2,20 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Apple Bento Slides - Explore Apple Event Presentations',
+  title: 'Apple Slides - Explore Apple Event Presentations',
   description: 'Discover the latest Apple event presentations in a unique bento-box style gallery. Filter by time and category to explore each slide in detail.',
   keywords: 'Apple events, presentations, slides, gallery, bento-box, filter, time, category',
   openGraph: {
-    title: 'Apple Bento Slides - Explore Apple Event Presentations',
+    title: 'Apple Slides - Explore Apple Event Presentations',
     description: 'Discover the latest Apple event presentations in a unique bento-box style gallery. Filter by time and category to explore each slide in detail.',
-    url: 'https://your-website-url.com',
-    siteName: 'Apple Bento Slides',
+    url: 'https://appleslides.com',
+    siteName: 'Apple Slides',
     images: [
       {
-        url: 'https://your-website-url.com/og-image.jpg',
+        url: 'https://appleslides.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Apple Bento Slides',
+        alt: 'Apple Slides',
       },
     ],
     locale: 'en_US',
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@your_twitter_handle',
-    title: 'Apple Bento Slides - Explore Apple Event Presentations',
+    title: 'Apple Slides - Explore Apple Event Presentations',
     description: 'Discover the latest Apple event presentations in a unique bento-box style gallery. Filter by time and category to explore each slide in detail.',
     images: [
       {
-        url: 'https://your-website-url.com/og-image.jpg',
+        url: 'https://appleslides.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Apple Bento Slides',
+        alt: 'Apple Slides',
       },
     ],
   },
@@ -52,7 +52,7 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/manifest.webmanifest" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#000000" />
-        <meta name="application-name" content="Apple Bento Slides" />
+        <meta name="application-name" content="Apple Slides" />
         <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
         <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png" />
@@ -66,7 +66,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="1024x1024" href="/favicon/apple-touch-icon-1024x1024.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Apple Bento Slides" />
+        <meta name="apple-mobile-web-app-title" content="Apple Slides" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png" />
         <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
