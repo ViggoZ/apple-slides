@@ -1,7 +1,7 @@
 // app/components/ImageGallery.tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface ImageGalleryProps {
@@ -22,6 +22,19 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     setSelectedImageIndex((prev) =>
       prev === null ? null : (prev - 1 + images.length) % images.length,
     );
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImageIndex !== null) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImageIndex]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-3 sm:px-6 pb-6 pt-3">
