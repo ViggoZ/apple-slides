@@ -1,5 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import React from 'react'; 
+import Head from 'next/head'; 
 
 export const metadata: Metadata = {
   title: 'Apple Slides - Explore Apple Event Presentations',
@@ -71,7 +73,31 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png" />
         <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       </head>
-      <body className="min-h-screen bg-neutral-950">{children}</body>
+      <body className="min-h-screen bg-neutral-950">
+        <Head>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BNDZR5F5C"></script>
+          <script>
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-0BNDZR5F5C');
+            `}
+          </script>
+
+          <script type="text/javascript">
+            {`
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "nvn5quuu5l");
+            `}
+          </script>
+        </Head>
+        {children}
+      </body>
     </html>
   );
 }
