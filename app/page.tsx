@@ -240,6 +240,7 @@ export default function Home() {
 
       {/* 主内容区域 */}
       <main className="flex-1 lg:pl-72 w-full pt-16 lg:pt-0 px-0">
+        <h1 className="sr-only">Apple Bento Slides - Explore Apple Event Keynote</h1>
         {isLoading ? (
           <div className="w-full h-full flex items-center justify-center">
             <div className="bg-neutral-800 p-6 rounded-3xl flex flex-col items-center justify-center w-48 h-48">
