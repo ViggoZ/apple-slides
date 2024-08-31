@@ -61,12 +61,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50"
           onClick={closeLightbox}
         >
-          <div className="absolute px-12 top-60 sm:top-60 text-white text-lg font-bold text-center w-full">
+          <div className="absolute px-12 top-60 sm:top-40 md-top-30 lg:top-20 text-white text-lg font-bold text-center w-full">
             {/* Extract and display the text content from the image name */}
             {images[selectedImageIndex].split('/').pop()?.split('-').slice(2, 3).join('').replace(/\[|\]|\.webp/g, '') + '@' + images[selectedImageIndex].split('/').pop()?.split('-').slice(0, 1).join('').replace(/\[|\]|\.webp/g, '')}
           </div>
           <button
-            className="hidden sm:flex absolute left-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
+            className="hidden sm:flex absolute left-1 sm:left-4 md:left-8 lg:left-12 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation();
               prevImage();
@@ -75,7 +75,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
             <FaChevronLeft />
           </button>
           <button
-            className="hidden sm:flex absolute right-16 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
+            className="hidden sm:flex absolute right-1 sm:right-4 md:right-8 lg:right-12 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation();
               nextImage();
@@ -83,20 +83,20 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
           >
             <FaChevronRight />
           </button>
+          <div className="w-11/12 sm:w-4/5 max-w-full max-h-full overflow-hidden flex items-center justify-center">
+            <img
+              src={images[selectedImageIndex]}
+              alt={images[selectedImageIndex]}
+              className="object-contain px-4 py-40 max-w-full max-h-screen opacity-0 scale-95"
+              style={{ animation: "fadeInAndScale 0.3s ease-out forwards" }}
+            />
+          </div>
           <button
-            className="absolute items-center bottom-52 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
+            className="absolute items-center bottom-1/4 sm:bottom-1/4 md:bottom-20 lg:bottom-10 text-white text-lg bg-white/20 hover:bg-white/30 rounded-full p-5 transition-colors duration-300"
             onClick={closeLightbox}
           >
             <FaTimes />
           </button>
-          <div className="max-w-7xl max-h-screen overflow-hidden flex items-center justify-center">
-            <img
-              src={images[selectedImageIndex]}
-              alt={images[selectedImageIndex]}
-              className="object-contain p-4 max-w-full max-h-screen opacity-0 scale-95"
-              style={{ animation: "fadeInAndScale 0.3s ease-out forwards" }}
-            />
-          </div>
         </div>
       )}
 
