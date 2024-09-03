@@ -346,7 +346,7 @@ export default function Home() {
               Created by <a href="https://buymeacoffee.com/viggoz" target="_blank" className="text-orange-500">Viggo</a>, inspired by the need to preserve and appreciate the visual history of Apple's presentations. Special thanks to the open-source community for the inspiration from projects like <a href="https://github.com/rickyzhangca/apple-summary-slides" className="text-orange-500">apple-summary-slides</a>.
             </p>
             <p className="mb-4 text-white/50 leading-relaxed">
-              Check out my other project: <a href="https://darkosicon.com" target="_blank" className="text-orange-500">DarkOS Icon Pack</a> !
+              Check out my other project: <a href="https://darkosicon.com" target="_blank" className="text-orange-500">DarkOS Icon Pack !</a>
             </p>
             <div className="flex justify-between items-center mt-6">
               <a href="https://buymeacoffee.com/viggoz" target="_blank" className="flex items-center space-x-2 text-orange-500">
