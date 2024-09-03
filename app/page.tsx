@@ -57,16 +57,22 @@ export default function Home() {
   const closeAboutModal = () => setIsAboutModalOpen(false);
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [hasSeenPopup, setHasSeenPopup] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsPopupVisible(true);
-    }, 4000);
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setIsPopupVisible(true);
+      }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [hasSeenPopup]);
 
-  const closePopup = () => setIsPopupVisible(false);
+  const closePopup = () => {
+    setIsPopupVisible(false);
+    setHasSeenPopup(true);
+  };
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -140,7 +146,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // 每次选择时间改变时，更新���用的类别选项
+    // 每次选择时间改变时，更新用的类别选项
     if (selectedTime === "All") {
       setFilteredCategories(categories);
     } else {
@@ -358,19 +364,19 @@ export default function Home() {
         </div>
       )}
 
-{isPopupVisible && (
-      <div className="fixed bottom-4 right-24 z-50">
-        <p>MacOS Dark Theme</p>
-        <a href="https://darkosicon.com" target="_blank" className="block relative bg-white bg-opacity-10 p-4 rounded-3xl shadow-lg hover:bg-opacity-20 transition-colors transition-opacity duration-300">
-          <button onClick={closePopup} className="absolute top-3 right-3 p-2 bg-white/50 opacity-50 rounded-full text-white">
-            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-          <img src="/mactheme.png" alt="Popup" className="w-64 h-auto" />
-        </a>
-      </div>
-    )}
+      {isPopupVisible && (
+        <div className="fixed bottom-4 right-20 z-50">
+          <a href="https://darkosicon.com" target="_blank" className="block relative bg-neutral-900 px-4 pt-2 pb-4 rounded-3xl shadow-lg hover:bg-neutral-800 transition-colors duration-300 bg-opacity-90 hover:bg-opacity-80 backdrop-blur-lg">
+            <p className="pb-2 text-neutral-600 text-md text-center font-medium">MacOS Dark Theme</p>
+            <button onClick={(e) => { e.preventDefault(); closePopup(); }} className="absolute top-2 right-2 p-2 bg-white/10 opacity-70 rounded-full text-white z-10">
+              <svg className="h-2 w-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+            <img src="/mactheme.png" alt="Popup" className="w-64 h-auto rounded-2xl" onClick={closePopup} />
+          </a>
+        </div>
+      )}
     </div>
   );
 }
