@@ -345,6 +345,9 @@ export default function Home() {
             <p className="mb-4 text-white/50 leading-relaxed">
               Created by <a href="https://buymeacoffee.com/viggoz" target="_blank" className="text-orange-500">Viggo</a>, inspired by the need to preserve and appreciate the visual history of Apple's presentations. Special thanks to the open-source community for the inspiration from projects like <a href="https://github.com/rickyzhangca/apple-summary-slides" className="text-orange-500">apple-summary-slides</a>.
             </p>
+            <p className="mb-4 text-white/50 leading-relaxed">
+              Check out my other project: <a href="https://darkosicon.com" target="_blank" className="text-orange-500">DarkOS Icon Pack</a> !
+            </p>
             <div className="flex justify-between items-center mt-6">
               <a href="https://buymeacoffee.com/viggoz" target="_blank" className="flex items-center space-x-2 text-orange-500">
                 <img src="/assets/coffee.svg" alt="Buy Me a Coffee" className="h-6 w-6" />
@@ -366,8 +369,8 @@ export default function Home() {
 
       {isPopupVisible && (
         <div className="fixed bottom-4 right-20 z-50">
-          <a href="https://darkosicon.com" target="_blank" className="block relative bg-neutral-900 px-4 pt-2 pb-4 rounded-3xl shadow-lg hover:bg-neutral-800 transition-colors duration-300 bg-opacity-90 hover:bg-opacity-80 backdrop-blur-lg">
-            <p className="pb-2 text-neutral-600 text-md text-center font-medium">MacOS Dark Theme</p>
+          <a href="https://darkosicon.com" target="_blank" className="block relative bg-neutral-800 px-4 pt-2 pb-4 rounded-3xl shadow-lg hover:bg-neutral-700 transition-colors duration-300 bg-opacity-80 hover:bg-opacity-70 backdrop-blur-lg">
+            <p className="pb-2 text-neutral-400 text-md text-center font-medium">MacOS Dark Theme</p>
             <button onClick={(e) => { e.preventDefault(); closePopup(); }} className="absolute top-2 right-2 p-2 bg-white/10 opacity-70 rounded-full text-white z-10">
               <svg className="h-2 w-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
