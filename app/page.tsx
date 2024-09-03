@@ -56,6 +56,18 @@ export default function Home() {
   const openAboutModal = () => setIsAboutModalOpen(true);
   const closeAboutModal = () => setIsAboutModalOpen(false);
 
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPopupVisible(true);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const closePopup = () => setIsPopupVisible(false);
+
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.keyCode === 27) closeAboutModal();
@@ -128,7 +140,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // 每次选择时间改变时，更新可用的类别选项
+    // 每次选择时间改变时，更新���用的类别选项
     if (selectedTime === "All") {
       setFilteredCategories(categories);
     } else {
@@ -345,6 +357,20 @@ export default function Home() {
           </button>
         </div>
       )}
+
+{isPopupVisible && (
+      <div className="fixed bottom-4 right-24 z-50">
+        <p>MacOS Dark Theme</p>
+        <a href="https://darkosicon.com" target="_blank" className="block relative bg-white bg-opacity-10 p-4 rounded-3xl shadow-lg hover:bg-opacity-20 transition-colors transition-opacity duration-300">
+          <button onClick={closePopup} className="absolute top-3 right-3 p-2 bg-white/50 opacity-50 rounded-full text-white">
+            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+          <img src="/mactheme.png" alt="Popup" className="w-64 h-auto" />
+        </a>
+      </div>
+    )}
     </div>
   );
 }
