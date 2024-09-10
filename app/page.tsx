@@ -8,6 +8,7 @@ import { TimeCategory } from "@/types";
 
 // 将 timeOrder 移到 useEffect 外部，使其在函数作用域内可访问
 const timeOrder = [
+  "Apple Event September 2024",
   "WWDC June 2024",
   "Apple Event May 2024",
   "Apple Event October 2023",
@@ -30,7 +31,7 @@ const timeOrder = [
 export default function Home() {
   const [times, setTimes] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [selectedTime, setSelectedTime] = useState<string>("WWDC June 2024");
+  const [selectedTime, setSelectedTime] = useState<string>("Apple Event September 2024");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [images, setImages] = useState<string[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
